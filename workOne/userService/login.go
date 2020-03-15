@@ -28,7 +28,7 @@ func Login(l *gin.Context) {
 	u.Password = l.PostForm("password")
 	db = sqlConn.Init()
 	db.Where(u).First(&m)
-	if m.ID < 0 {
+	if m.ID > 0 {
 		token := jwt.Create(u.Username)
 		response.OKWithToken(l, "登录成功喵！", token)
 	} else {
